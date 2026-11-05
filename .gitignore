@@ -28,7 +28,7 @@ build/
 .flutter-plugins-dependencies
 .packages
 .pub-cache/
-pubspec.lock
+/dependencies/**/pubspec.lock
 
 # Android
 android/.gradle/

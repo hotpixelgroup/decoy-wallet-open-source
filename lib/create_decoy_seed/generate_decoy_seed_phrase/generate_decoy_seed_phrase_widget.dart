@@ -39,6 +39,8 @@ class _GenerateDecoySeedPhraseWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => GenerateDecoySeedPhraseModel());
+    // Entering generation fresh drops any abandoned in-memory mnemonic.
+    SeedHandoff.clear();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }

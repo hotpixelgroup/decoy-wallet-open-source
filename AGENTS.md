@@ -64,6 +64,14 @@ system.
    tree.
 6. Do not add clipboard, screenshot, share, or logging paths that capture the
    mnemonic without an explicit, reviewed product request.
+7. The mnemonic moves between seed screens **only** through the in-memory
+   `SeedHandoff` (`lib/create_decoy_seed/seed_handoff.dart`). Never put it in
+   `queryParameters`, `pathParameters`, `extra` that is serialized, or deep
+   links; `test/seed_route_privacy_test.dart` enforces this.
+8. Screens that display seed words must call `SecureScreen.enable()` in
+   `initState` and `SecureScreen.disable()` in `dispose`
+   (`lib/create_decoy_seed/secure_screen.dart`; Android `FLAG_SECURE`, iOS
+   app-switcher/capture overlay via the `decoy_wallet/secure_screen` channel).
 
 ## Never-touch / ask first
 
@@ -84,7 +92,7 @@ Do **not** do these without an explicit maintainer request:
 From the repo root, with Flutter **3.41.6**:
 
 ```sh
-flutter pub get
+flutter pub get --enforce-lockfile
 flutter analyze --no-fatal-infos
 flutter test
 ```
@@ -106,7 +114,10 @@ Risk / How to revert for the PR body.
 Notes verified on Flutter 3.41.6 (Linux):
 
 - `node --test backend/membership_redemption/*.test.mjs` passes.
-- Focused wallet tests such as `test/decoy_seed_entropy_test.dart` pass.
+- Focused wallet tests such as `test/decoy_seed_entropy_test.dart`,
+  `test/seed_route_privacy_test.dart` and `test/secure_screen_test.dart` pass.
+- `pubspec.lock` is committed and was generated with Flutter 3.41.6. If you
+  change `pubspec.yaml`, regenerate it with 3.41.6 and commit both.
 - Full `flutter test` can fail three English home-page **golden** comparisons
   (`test/localized_home_page_test.dart`, ~0.6–2% pixel diff) on Linux due to
   font/renderer differences. Do not regenerate goldens or delete those tests

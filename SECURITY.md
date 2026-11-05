@@ -68,6 +68,11 @@ them in public.
 - The decoy mnemonic is generated on-device. Only a decoy id, watch-only xpub,
   and derivation path should leave the device. Reports that the mnemonic is
   transmitted, logged, or persisted incorrectly are high priority.
+- The mnemonic is handed between seed screens in memory only (never in route
+  or URL parameters) and seed screens request OS capture protection: Android
+  `FLAG_SECURE`; on iOS an opaque overlay in the app switcher and while the
+  screen is recorded or mirrored. iOS cannot block screenshots; that is a
+  known platform limit, not a vulnerability in this app.
 - Public Firebase API keys and Supabase anon JWTs in client config are expected;
   they are not privileged secrets. Privilege belongs to server rules and
   service-role keys, which must never appear in this repository.

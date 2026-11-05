@@ -98,9 +98,19 @@ node --test backend/membership_redemption/*.test.mjs
 Optional account-deletion suite needs PGlite; see
 `backend/account_deletion/README.md`.
 
-**Done means:** the commands above that apply to your change are green, the
-diff is limited to the paths you intended, no secrets were added, and you can
-state Testing / Risk / How to revert for the PR body.
+**Done means:** the commands above that apply to your change are green (or
+you document a pre-existing failure you did not cause), the diff is limited to
+the paths you intended, no secrets were added, and you can state Testing /
+Risk / How to revert for the PR body.
+
+Notes verified on Flutter 3.41.6 (Linux):
+
+- `node --test backend/membership_redemption/*.test.mjs` passes.
+- Focused wallet tests such as `test/decoy_seed_entropy_test.dart` pass.
+- Full `flutter test` can fail three English home-page **golden** comparisons
+  (`test/localized_home_page_test.dart`, ~0.6–2% pixel diff) on Linux due to
+  font/renderer differences. Do not regenerate goldens or delete those tests
+  without maintainer approval; say so in the PR if they fail locally.
 
 Evidence beats "should pass." Paste command output (or a clear reason a
 command was not run).

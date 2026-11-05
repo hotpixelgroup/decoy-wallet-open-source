@@ -81,3 +81,6 @@ pubspec_overrides.yaml
 # FVM local SDK checkout
 .fvm/flutter_sdk
 .fvm/flutter_sdk/
+
+# Local golden failure dumps
+test/failures/

@@ -1,0 +1,21 @@
+title = "Decoy Wallet gitleaks config"
+
+[extend]
+useDefault = true
+
+# Public client identifiers that ship in the mobile app by design.
+# Security relies on Supabase RLS / Firebase rules, not on hiding these values.
+[[allowlists]]
+description = "Public Firebase / Supabase client config and example placeholders"
+paths = [
+  '''(^|/)google-services\.json(\.example)?$''',
+  '''(^|/)GoogleService-Info\.plist(\.example)?$''',
+  '''(^|/)lib/backend/firebase/firebase_config\.dart$''',
+  '''(^|/)lib/backend/supabase/.*\.dart$''',
+  '''\.example$''',
+]
+regexTarget = "match"
+regexes = [
+  '''AIza[0-9A-Za-z\-_]{35}''',
+  '''eyJ[A-Za-z0-9_\-]+\.[A-Za-z0-9_\-]+\.[A-Za-z0-9_\-]+''',
+]

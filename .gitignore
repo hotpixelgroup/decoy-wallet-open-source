@@ -74,3 +74,10 @@ supabase/.temp/
 .idea/
 .vscode/
 *.log
+
+# Local dependency overrides (do not commit)
+pubspec_overrides.yaml
+
+# FVM local SDK checkout
+.fvm/flutter_sdk
+.fvm/flutter_sdk/

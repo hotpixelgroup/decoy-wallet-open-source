@@ -69,7 +69,11 @@ them in public.
   and derivation path should leave the device. Reports that the mnemonic is
   transmitted, logged, or persisted incorrectly are high priority.
 - The mnemonic is handed between seed screens in memory only (never in route
-  or URL parameters) and seed screens request OS capture protection: Android
+  or URL parameters, so a crafted deep link cannot inject or read words). The
+  reference is dropped after verification, on a new generation, on sign-out or
+  account switch, and when the duress PIN opens decoy mode. Dart cannot
+  overwrite strings, so the words stay in process memory until
+  garbage-collected. Seed screens request OS capture protection: Android
   `FLAG_SECURE`; on iOS an opaque overlay in the app switcher and while the
   screen is recorded or mirrored. iOS cannot block screenshots; that is a
   known platform limit, not a vulnerability in this app.

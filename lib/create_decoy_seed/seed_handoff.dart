@@ -1,11 +1,17 @@
 /// In-memory hand-off for the freshly generated decoy mnemonic.
 ///
-/// The mnemonic must never travel through router query/path parameters:
-/// on web those become part of the URL (address bar, history, server logs,
-/// crash reporters), and on mobile they can surface in route restoration or
-/// diagnostics. Instead the generating screen stores it here and the
-/// show/verify routes read it back. It is never persisted, never logged, and
-/// is cleared once verification completes or a new mnemonic is generated.
+/// The mnemonic must never travel through router query/path parameters or
+/// `extra`: on web those become part of the URL and browser history, and a
+/// custom-scheme deep link could otherwise inject attacker-chosen words.
+/// Instead the generating screen stores it here and the show/verify routes
+/// read it back for the matching decoy id.
+///
+/// This class never persists or logs the mnemonic. The reference is dropped
+/// when verification succeeds, when generation is re-entered, when the
+/// signed-in user changes (including sign-out) and when the duress PIN opens
+/// decoy mode. Locking the app keeps it, so unlocking returns to the seed
+/// screen. Dart strings are immutable, so [clear] cannot overwrite the words;
+/// they stay in process memory until garbage-collected.
 class SeedHandoff {
   SeedHandoff._();
 

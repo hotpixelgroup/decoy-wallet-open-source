@@ -195,6 +195,10 @@ class _GenerateDecoySeedPhraseWidgetState
                                 mnemonic: _model.tempMnemonic,
                                 decoyId: _model.tempDecoyId,
                               );
+                              // SeedHandoff is now the only holder; drop this
+                              // page's copies while it stays under the stack.
+                              _model.tempMnemonic = null;
+                              _model.decoyDraftOut = null;
                               context.pushNamed(
                                 ShowDecoySeedPhraseWidget.routeName,
                                 queryParameters: {

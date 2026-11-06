@@ -14,7 +14,8 @@ and [AGENTS.md](AGENTS.md) if you use an AI coding agent.
 - Keep changes focused on the mobile app source (and the published `backend/`
   helpers when that is the topic).
 - Do not add production credentials, service URLs, signing material, user data,
-  private monitoring code, release artifacts, or app-store assets.
+  backend deployment scripts, private monitoring code, release artifacts, or
+  app-store assets.
 - Use example files and documented `--dart-define` values for operator-specific
   configuration.
 - Treat legal copy, safety-critical behavior, alert delivery, payments, and

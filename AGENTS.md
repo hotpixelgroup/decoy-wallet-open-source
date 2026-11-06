@@ -16,8 +16,11 @@ system.
 - Flutter **3.41.6** / Dart matching that SDK (pinned in
   `.github/workflows/public-verification.yml` and `.fvmrc`).
 - Do not upgrade Flutter, Dart, or dependency versions without maintainer
-  approval. Newer stable Flutter (for example 3.47+) currently breaks several
-  pinned packages (`intl`, `font_awesome_flutter`, `page_transition`).
+  approval. Newer stable Flutter (checked with 3.47.9) resolves without
+  overrides but moves several locked versions (`intl` 0.20.2 → 0.20.3,
+  `meta`, `vector_math`, `matcher`, `test_api`), so
+  `flutter pub get --enforce-lockfile` fails on it. Regenerate the lock only in
+  an approved toolchain-upgrade PR.
 - Prefer `fvm flutter …` when FVM is installed; otherwise use a 3.41.6 SDK.
 
 ## Repository map
@@ -84,8 +87,7 @@ system.
 
 Do **not** do these without an explicit maintainer request:
 
-- `git push` to `main`, force-push, rewrite history, or open a PR against
-  **upstream** `decoywalletapp/decoy-wallet-open-source`
+- `git push` to `main`, force-push, rewrite history, or open a pull request
 - Change `codemagic.yaml`, Android/iOS signing, package ids, or release tags
 - Bump dependency versions or Flutter SDK pins
 - Disable CI jobs, `continue-on-error` new failing gates, or broaden
@@ -152,5 +154,5 @@ network calls:
 ## Escalation
 
 Escalate to the maintainer when: scope is unclear, a secret appears in the
-tree, CI fails outside your diff, upstream and fork `main` diverge, or a
-fix would change product behavior around seeds, alerts, or payments.
+tree, CI fails outside your diff, or a fix would change product behavior
+around seeds, alerts, or payments.

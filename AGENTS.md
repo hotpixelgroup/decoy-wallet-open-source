@@ -66,8 +66,11 @@ system.
    mnemonic without an explicit, reviewed product request.
 7. The mnemonic moves between seed screens **only** through the in-memory
    `SeedHandoff` (`lib/create_decoy_seed/seed_handoff.dart`). Never put it in
-   `queryParameters`, `pathParameters`, `extra` that is serialized, or deep
-   links; `test/seed_route_privacy_test.dart` enforces this.
+   `queryParameters`, `pathParameters`, `extra`, URLs or deep links.
+   `test/seed_route_behaviour_test.dart` drives the real routes and checks
+   what the router reports; `test/seed_route_privacy_test.dart` is a
+   source-level lint on top. Static scans cannot follow aliases, so review
+   any new code that touches the mnemonic by hand.
 8. Screens that display seed words must call `SecureScreen.enable()` in
    `initState` and `SecureScreen.disable()` in `dispose`
    (`lib/create_decoy_seed/secure_screen.dart`; Android `FLAG_SECURE`, iOS

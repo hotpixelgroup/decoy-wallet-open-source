@@ -19,9 +19,9 @@ app-store releases.
 
 ## Reporting a Vulnerability
 
-Use [GitHub private vulnerability reporting](https://github.com/hotpixelgroup/decoy-wallet-open-source/security/advisories/new)
-on this fork when available. For the upstream project, use that repository's
-advisory form or email:
+Use GitHub private vulnerability reporting (**Security → Report a
+vulnerability** on the repository page) if it is enabled. If private reporting
+is not available, email the maintainer privately at:
 
 support@decoywalletapp.com
 

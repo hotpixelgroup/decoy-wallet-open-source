@@ -142,7 +142,7 @@ network calls:
 ## Commits and PRs
 
 - Conventional commit subjects (`fix:`, `docs:`, `ci:`, `chore:`, `test:`).
-- Small PRs. High-risk paths need maintainer review (see `CODEOWNERS`).
+- Small PRs. High-risk paths (see the repository map) need maintainer review.
 - Agents never merge. Agents never approve their own high-risk change.
 
 ## Escalation

@@ -50,9 +50,13 @@ system.
 1. Decoy **mnemonic / seed material is generated on-device** and must **never**
    be sent to a server, written to logs, committed, or embedded in URLs /
    analytics.
-2. Registration may send only **decoy id, watch-only xpub, and derivation
-   path** (see `lib/custom_code/actions/create_and_register_decoy.dart` and
-   `docs/DECOY_SEED_ENTROPY.md`).
+2. Arming a decoy sends only **watch-only public material**: decoy id,
+   derivation path, account xpub, watch public key (zpub) and its type,
+   derived receive addresses, source type and the monitoring flag
+   (`CommitDecoyCall` in `lib/backend/api_requests/api_calls.dart`, called from
+   `lib/create_decoy_seed/decoy_seed_system_values/decoy_seed_system_values_widget.dart`;
+   see `docs/DECOY_SEED_ENTROPY.md`). Adding a field to that payload needs
+   maintainer review; private keys, seed bytes and the mnemonic never go in it.
 3. Entropy for key material uses a **CSPRNG** (`Random.secure()` / equivalent).
    Never use `Random()` or `nextInt` for seeds, keys, IVs, or quiz indices that
    protect secrets.

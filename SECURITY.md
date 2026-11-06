@@ -65,9 +65,15 @@ them in public.
 
 ## Wallet-specific disclosure notes
 
-- The decoy mnemonic is generated on-device. Only a decoy id, watch-only xpub,
-  and derivation path should leave the device. Reports that the mnemonic is
-  transmitted, logged, or persisted incorrectly are high priority.
+- The decoy mnemonic and its private keys are generated on-device and must
+  never leave it. Arming a decoy sends only watch-only public material to the
+  backend: the decoy id, the BIP84 derivation path, the account xpub, the watch
+  public key (zpub) and its type, the derived receive addresses, the source
+  type and whether monitoring is on (see `docs/DECOY_SEED_ENTROPY.md`). An
+  imported watch-only wallet sends the xpub/zpub or address list the user
+  entered. The xpub reveals every address and balance of that decoy, so it is
+  private but not a spending secret. Reports that the mnemonic or private keys
+  are transmitted, logged, or persisted are high priority.
 - The mnemonic is handed between seed screens in memory only (never in route
   or URL parameters, so a crafted deep link cannot inject or read words). The
   reference is dropped after verification, on a new generation, on sign-out or

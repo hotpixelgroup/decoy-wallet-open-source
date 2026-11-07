@@ -7,8 +7,8 @@ import 'package:flutter/services.dart';
 /// screenshots, screen recording and the recents thumbnail).
 /// iOS: shows a privacy overlay when the app resigns active (app switcher
 /// snapshot) and while the screen is being captured/mirrored. iOS does not
-/// allow apps to block screenshots; a screenshot taken while protected is
-/// detected but cannot be prevented.
+/// allow apps to block screenshots, and this code does not detect them
+/// either: a screenshot of a seed screen on iOS captures the words.
 ///
 /// Uses reference counting so nested seed screens do not clear protection
 /// early. Failures are swallowed: protection is best effort and must never

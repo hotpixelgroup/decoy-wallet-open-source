@@ -11,9 +11,10 @@ not part of this public source tree.
 ## Status
 
 Public sanitized source tree for review and independent builds. Not a turnkey
-production deployment. CI on `main` runs Flutter tests and an Android debug APK
-build (see `.github/workflows/public-verification.yml`). Agent contributors:
-read [AGENTS.md](AGENTS.md).
+production deployment. CI runs the Flutter tests and an Android debug APK build
+on pull requests and on pushes to `main` (see
+`.github/workflows/public-verification.yml`). Agent contributors: read
+[AGENTS.md](AGENTS.md).
 
 ## What is included
 

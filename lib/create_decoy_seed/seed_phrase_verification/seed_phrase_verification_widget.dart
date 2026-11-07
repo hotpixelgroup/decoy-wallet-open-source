@@ -54,7 +54,7 @@ class _SeedPhraseVerificationWidgetState
   @override
   void initState() {
     super.initState();
-    // Block screenshots/recording/app-switcher snapshot while seed is shown.
+    // OS capture protection while the seed is on screen (see SecureScreen).
     SecureScreen.enable();
     _model = createModel(context, () => SeedPhraseVerificationModel());
 

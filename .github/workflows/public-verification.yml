@@ -13,7 +13,9 @@ on:
 
 concurrency:
   group: public-verification-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  # Only superseded PR runs are cancelled. Every push to main and every tag
+  # finishes, so each commit gets its debug APK and provenance attestation.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read

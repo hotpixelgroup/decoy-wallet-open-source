@@ -127,10 +127,12 @@ Notes verified on Flutter 3.41.6 (Linux):
   `test/seed_route_privacy_test.dart` and `test/secure_screen_test.dart` pass.
 - `pubspec.lock` is committed and was generated with Flutter 3.41.6. If you
   change `pubspec.yaml`, regenerate it with 3.41.6 and commit both.
-- Full `flutter test` can fail three English home-page **golden** comparisons
-  (`test/localized_home_page_test.dart`, ~0.6–2% pixel diff) on Linux due to
-  font/renderer differences. Do not regenerate goldens or delete those tests
-  without maintainer approval; say so in the PR if they fail locally.
+- The three English home-page **golden** comparisons in
+  `test/localized_home_page_test.dart` run only on macOS, where the images
+  were captured; elsewhere those three tests report as skipped (their layout
+  checks still run). Linux glyph anti-aliasing differs by ~0.6–2% of pixels.
+  Do not regenerate goldens or delete those tests without maintainer
+  approval.
 
 Evidence beats "should pass." Paste command output (or a clear reason a
 command was not run).

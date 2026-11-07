@@ -1,14 +1,33 @@
 title = "Decoy Wallet gitleaks config"
 
+# Run locally (CI does not run gitleaks yet):
+#   gitleaks git --log-opts="--all" .       # whole history
+#   gitleaks git --pre-commit --staged .    # staged changes, before committing
+# Prefer these over `gitleaks dir .`, which also scans gitignored build/ and
+# .dart_tool/ output and reports false positives in compiled test caches.
+#
+# Keep every allowlist narrow: a real service-role key or private key pasted
+# anywhere, including a *.example file, must still be reported. The tracked
+# example configs hold placeholders that trip no rule, so none is allowlisted.
+#
+# Allowlists hang off the generic-api-key rule, not the global [[allowlists]]:
+# in `gitleaks dir` a global path entry skips the whole file and ignores
+# condition = "AND", which would hide a JWT pasted into that file.
+
 [extend]
 useDefault = true
 
-# Example / placeholder client config only. Real lib/backend files should still
-# alert on unexpected high-entropy secrets so a service-role JWT cannot hide.
-[[allowlists]]
-description = "Example Firebase / Google services placeholders"
-paths = [
-  '''(^|/)google-services\.json\.example$''',
-  '''(^|/)GoogleService-Info\.plist\.example$''',
-  '''\.example$''',
-]
+[[rules]]
+id = "generic-api-key"
+
+# CocoaPods records a 40-hex SHA-1 checksum per pod.
+[[rules.allowlists]]
+description = "Podfile.lock pod checksums"
+condition = "AND"
+paths = ['''(^|/)ios/Podfile\.lock$''']
+regexes = ['''^[0-9a-f]{40}$''']
+
+# FlutterFlow persisted-state key names such as 'ff_registerDecoyUrl'.
+[[rules.allowlists]]
+description = "FlutterFlow secure-storage key names"
+regexes = ['''^ff_[A-Za-z][A-Za-z0-9]*$''']
